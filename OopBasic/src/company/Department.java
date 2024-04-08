@@ -1,20 +1,37 @@
-String content = "これは最初の行です。\nこれは次の行です。\nそして、これが最後の行です。";
+package company;
 
-try {
-    // ファイルの書き込み
-    Files.writeString(Paths.get("example.txt"), content);
+public class Department {
+    private final String name;
+    private final String departmentId;
+    private int budget;
 
-    // ファイルの読み込み
-    String content2 = Files.readString(Paths.get("example.txt"));
-    System.out.println(content2);
-    
-    // ファイルを行ごとに読み込み
-    List<String> lines = Files.readAllLines(Paths.get("example.txt"));
-    var lineNumber = 1;
-    for (String line : lines) {
-        System.out.println("%d行目：%s".formatted(lineNumber, line));
-        lineNumber++;
+    // コンストラクター
+    public Department(String name, String departmentId, int budget) {
+        this.name = name;
+        this.departmentId = departmentId;
+        this.budget = budget;
     }
-} catch (IOException e) {
-    e.printStackTrace();
+
+    // 会議を開催する
+    public void meeting() {
+        System.out.println("部内会議を開催します。部署：" + name + "、予算：" + budget);
+    }
+
+    // nameのgetter
+    public String getName() {
+        return name;
+    }
+
+    // budgetのgetter
+    public double getBudget() {
+        return budget;
+    }
+
+    // budgetのsetter
+    public void setBudget(int budget) {
+        if (budget < 0) {
+            throw new IllegalArgumentException("予算はマイナスにできません。");
+        }
+        this.budget = budget;
+    }
 }
